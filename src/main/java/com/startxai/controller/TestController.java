@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
-
-    @GetMapping("/apitest")
-    public String testApi() {
-        return "✅ StartXAIChatBot backend connected successfully!";
+    @GetMapping("/test")
+    public String test() {
+        return "Backend is working!";
     }
 }
