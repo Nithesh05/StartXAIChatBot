@@ -12,7 +12,7 @@ public class ChatController {
 
     @PostMapping("/chat")
     public Map<String, String> chat(@RequestBody Map<String, String> request) {
-        String userId = "default"; // can change to unique ID later
+        String userId = "default"; // you can make this unique later
         String userMessage = request.get("message").toLowerCase();
 
         userStage.putIfAbsent(userId, 0);
@@ -52,17 +52,14 @@ public class ChatController {
 
             case 5:
                 userData.get(userId).put("budget", userMessage);
+                // ✅ Combine both final messages here (no waiting stage)
                 reply = "Perfect! 🎯 Based on your answers, I’ll generate a strategy suggestion for your "
                         + userData.get(userId).get("businessType") + " in "
                         + userData.get(userId).get("location") + " targeting "
-                        + userData.get(userId).get("audience") + ". Please wait a moment...";
-                userStage.put(userId, 6);
-                break;
-
-            case 6:
-                // Mock AI analysis - can replace this part with OpenAI API later
-                reply = "Strategy Suggestion: Focus on " +
-                        userData.get(userId).get("audience") + " marketing and use AI-based tools for personalized offers.";
+                        + userData.get(userId).get("audience") + ".\n\n"
+                        + "💡 Strategy Suggestion: Focus on "
+                        + userData.get(userId).get("audience")
+                        + " marketing and use AI-based tools for personalized offers.";
                 userStage.put(userId, 7);
                 break;
 
