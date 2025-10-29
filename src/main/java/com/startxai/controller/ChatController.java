@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 
+@CrossOrigin(origins = "*") // ✅ Allow Flutter app to connect
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
@@ -40,7 +41,6 @@ public class ChatController {
             return Map.of("message", "⚠️ Please login first!");
         }
 
-        // Simulated multi-API logic (replace later with your actual APIs)
         String apiResult = apiService.processAPIs(userInput);
 
         Map<String, Object> response = new LinkedHashMap<>();
@@ -51,7 +51,7 @@ public class ChatController {
         return response;
     }
 
-    // ✅ 4. Export strategy (can be downloaded)
+    // ✅ 4. Export strategy
     @GetMapping("/export")
     public String exportStrategy(@RequestParam String username) {
         return "📝 Strategy exported successfully for " + username + "!";
